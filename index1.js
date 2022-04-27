@@ -1,24 +1,26 @@
-//you can call out special non milatary time using this format below which I wont but keep for record only
-//var hours =[""]
+$('#currentDay ').text().format('ddddMMMMDo')
 // going to create a function for time blocks
-function makeTblocks(hour, _currentTodo = ""){
-    var crntHour = new Date().getHours() -1;
-    var ppOrF = "future";
+
+function makeTimblocks(hour, currentTodo = ""){
+    var curntHour = new Date().getHours();
+    var presntPassOrFutr = "future";
 // adding some logic for past, present and future
-    if (crntHour > hour + 7) ppOrF = "past";
-    // creating if statements for time
-    if(crntHour=== hour + 7) ppOrF = "present";
-// my hours and current todo for localstorage.getit for my hourNam
     var hourNam = hour;
     var currentTodo = localStorage.getItem(hourNam);
+
+    if (curntHour > hour) presntPassOrFutr = "past";
+    // creating if statements for time
+    if(curntHour === hour) presntPassOrFutr = "present";
+// my hours and current todo for localstorage.getit for my hourNam
+    
     //if(!currentTodo)currentTodo = ""; this was something Allec mention nice 
     console.log("Todo List is Save for", hourNam, currentTodo);
     // adding jqurey professor Chad taught us but love VJS
     $(".box").append($(`
     <div class= "row time-blocks"> 
-        <div class=" hours col-1">7AM</div>
-        <textarea name="" id="" cols="30" rows="5" class= "description cols-7"> ${ppOrF}">
-        ${currentTodo || ""}</textarea>
+        <div class=" hours col-1">${hour}:00</div>
+        <textarea name="" id="" cols="30" rows="3" class= "description cols-7"> ${presntPassOrFutr}"
+         ${currentTodo || ""}</textarea>
         <button class="btn saveBtn col-2">Save</button>
     </div>`)
 );
@@ -26,12 +28,12 @@ function makeTblocks(hour, _currentTodo = ""){
 // nedd to make sure when app loads it will grap all current todo to show
 };
 // going for a Vanilla JS
-for (var i = 7; i<17; i++){
-    makeTblocks(i);
+for (var i = 7; i < 17; i++){
+    makeTimblocks(i);
 };
 // click button for the save buttons
 var savBtn = document.querySelectorAll(".savBtn"); // querySelector only calls out first element that matches the slector but not all
-//console.log(savBtn[0]);
+console.log(savBtn[0]);
 alert("Schedule Saved! O_o");
 // need a for loop to generate the save click button individually not at the same time.
 for(var i = 0; i<savBtn.length; i++){
